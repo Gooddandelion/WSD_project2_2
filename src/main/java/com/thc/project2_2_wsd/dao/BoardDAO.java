@@ -18,6 +18,8 @@ public class BoardDAO {
 
     private final String BOARD_INSERT = "insert into BOARD(title, writer, password, category, content) values(?,?,?,?,?)";
     private final String BOARD_LIST = "select * from BOARD order by regdate desc";
+    private final String BOARD_DELETE = "delete from BOARD where seq = ?";
+
 
     public int insertBoard(BoardVO vo) {
         try {
@@ -54,6 +56,18 @@ public class BoardDAO {
                 list.add(vo);
             }
             return list;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteBoard(BoardVO vo) {
+
+        try {
+            con = JDBCUtill.getConnection();
+            pstmt = con.prepareStatement(BOARD_DELETE);
+            pstmt.setInt(1, vo.getSeq());
+            pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
