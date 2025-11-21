@@ -24,7 +24,6 @@ public class BoardDAO {
             pstmt.setString(2, vo.getWriter());
             pstmt.setString(3, vo.getContent());
             pstmt.executeUpdate();
-
             return 1;
         } catch (SQLException e) {
             throw new RuntimeException(e);
