@@ -62,7 +62,6 @@ public class BoardDAO {
     }
 
     public void deleteBoard(BoardVO vo) {
-
         try {
             con = JDBCUtill.getConnection();
             pstmt = con.prepareStatement(BOARD_DELETE);
