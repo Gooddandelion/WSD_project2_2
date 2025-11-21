@@ -1,35 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.HashMap" %>
+<%@ page import="com.thc.project2_2_wsd.dao.BoardDAO" %>
+<%@ page import="com.thc.project2_2_wsd.bean.BoardVO" %>
+<%@ page import="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
-    ArrayList<HashMap<String, String>> boardList = new ArrayList<>();
-
-    HashMap<String, String> post1 = new HashMap<>();
-    post1.put("id" , "1");
-    post1.put("title" , "11주차 피곤하네요");
-    post1.put("writer" , "박헌일");
-    post1.put("createdAt" , "2025-11-15");
-    post1.put("views" , "10"); // 항목 5개 이상 (조회수 추가)
-    boardList.add(post1);
-
-    HashMap<String, String> post2 = new HashMap<>();
-    post2.put("id" , "2");
-    post2.put("title" , "벌써 기말이 한달밖에,,");
-    post2.put("writer" , "조우진");
-    post2.put("createdAt" , "2025-11-16");
-    post2.put("views" , "22");
-    boardList.add(post2);
-
-    HashMap<String, String> post3 = new HashMap<>();
-    post3.put("id" , "3");
-    post3.put("title" , "취직 언제 하죠?");
-    post3.put("writer" , "무직백수");
-    post3.put("createdAt" , "2025-11-17");
-    post3.put("views" , "5");
-    boardList.add(post3);
+    BoardDAO boardDAO = new BoardDAO();
+    List<BoardVO> list = boardDAO.getBoardList();
+    request.setAttribute("list", list);
 %>
-<html>
 <head>
     <title>게시판 목록</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -51,25 +30,25 @@
         </tr>
         </thead>
         <tbody>
-        <% for (HashMap<String, String> post : boardList) { %>
+        <c:forEach items="${list}" var="u">
         <tr>
-            <td><%= post.get("id") %>
+            <td>${u.seq}
             </td>
 
             <td class="text-start">
-                <a href="view.jsp?id=<%= post.get("id") %>" class="text-decoration-none text-dark">
-                    <%= post.get("title") %>
+                <a href="view.jsp?id=${u.seq}" class="text-decoration-none text-dark">
+                        ${u.title}
                 </a>
             </td>
 
-            <td><%= post.get("writer") %>
+            <td>${u.writer}
             </td>
-            <td><%= post.get("createdAt") %>
+            <td>${u.regdate}
             </td>
-            <td><%= post.get("views") %>
+            <td>${u.cnt}
             </td>
         </tr>
-        <% } %>
+        </c:forEach>
         </tbody>
     </table>
 
@@ -79,4 +58,3 @@
 </div>
 
 </body>
-</html>
