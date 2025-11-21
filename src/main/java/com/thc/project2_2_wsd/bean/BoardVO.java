@@ -10,6 +10,14 @@ public class BoardVO {
     private Date regdate;
     private int cnt;
 
+    public BoardVO() {}
+
+    public BoardVO(String title , String writer , String content) {
+        this.writer = writer;
+        this.content = content;
+        this.title = title;
+    }
+
     public int getSeq() {
         return seq;
     }
