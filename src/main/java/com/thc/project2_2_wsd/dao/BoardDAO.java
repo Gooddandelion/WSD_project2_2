@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BoardDAO {
 
@@ -15,6 +17,7 @@ public class BoardDAO {
     ResultSet rs = null;
 
     private final String BOARD_INSERT = "insert into BOARD(title, writer, password, category, content) values(?,?,?,?,?)";
+    private final String BOARD_LIST = "select * from BOARD order by regdate desc";
 
     public int insertBoard(BoardVO vo) {
         try {
@@ -27,6 +30,30 @@ public class BoardDAO {
             pstmt.setString(5, vo.getContent());
             pstmt.executeUpdate();
             return 1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<BoardVO> getBoardList() {
+        List<BoardVO> list = new ArrayList<>();
+        try {
+            con = JDBCUtill.getConnection();
+            pstmt = con.prepareStatement(BOARD_LIST);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                BoardVO vo = new BoardVO();
+                vo.setSeq(rs.getInt("seq"));
+                vo.setTitle(rs.getString("title"));
+                vo.setWriter(rs.getString("writer"));
+                vo.setCategory(rs.getString("category"));
+                vo.setContent(rs.getString("content"));
+                vo.setRegdate(rs.getDate("regdate"));
+                vo.setCnt(rs.getInt("cnt"));
+                list.add(vo);
+            }
+            return list;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
