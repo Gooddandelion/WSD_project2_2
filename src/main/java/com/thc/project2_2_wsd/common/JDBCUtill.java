@@ -1,4 +1,4 @@
-package com.thc.project2_2_wsd;
+package com.thc.project2_2_wsd.common;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,4 +25,6 @@ public class JDBCUtill {
 
         return con;
     }
+
+
 }
