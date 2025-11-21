@@ -5,17 +5,21 @@ import java.util.Date;
 public class BoardVO {
     private int seq;
     private String title;
-    private String content;
     private String writer;
+    private String password;
+    private String category;
+    private String content;
     private Date regdate;
     private int cnt;
 
     public BoardVO() {}
 
-    public BoardVO(String title , String writer , String content) {
-        this.writer = writer;
-        this.content = content;
+    public BoardVO(String title , String writer , String content, String password, String category) {
         this.title = title;
+        this.writer = writer;
+        this.password = password;
+        this.category = category;
+        this.content = content;
     }
 
     public int getSeq() {
@@ -40,6 +44,22 @@ public class BoardVO {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getWriter() {
