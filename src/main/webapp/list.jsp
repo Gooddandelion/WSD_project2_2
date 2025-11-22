@@ -7,6 +7,14 @@
 <%
     BoardDAO boardDAO = new BoardDAO();
     List<BoardVO> list = boardDAO.getBoardList();
+    String keyword = request.getParameter("searchKeyword");
+
+    if (keyword != null && !keyword.trim().isEmpty()) {
+        list = boardDAO.searchBoard(keyword);
+    } else {
+        list = boardDAO.getBoardList();
+    }
+
     request.setAttribute("list", list);
 %>
 <head>
@@ -16,6 +24,17 @@
 <jsp:include page="header.jsp" />
 <div class="container mt-5">
     <h2 class="text-center mb-4">JSP 게시판</h2>
+
+    <div class="row mb-3">
+        <div class="col-md-6 offset-md-3"> <form action="list.jsp" method="get" class="d-flex">
+            <input class="form-control me-2" type="text" name="searchKeyword" placeholder="제목을 입력하세요" value="${param.searchKeyword}">
+            <button class="btn btn-outline-primary" type="submit" > 검색 search</button>
+            <c:if test="${not empty param.searchKeyword}">
+                <a href="list.jsp" class="btn btn-outline-secondary ms-1" >초기화 reset</a>
+            </c:if>
+        </form>
+        </div>
+    </div>
 
     <table class="table table-hover text-center">
         <thead class="table-light">
