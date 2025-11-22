@@ -21,7 +21,7 @@ public class BoardDAO {
     private final String BOARD_DELETE = "delete from BOARD where seq = ?";
     private final String BOARD_SELECT = "select * from BOARD where seq = ? order by regdate desc";
     private final String BOARD_UPDATE = "update BOARD set title = ?, writer = ?, category = ?, content = ? where seq = ?";
-    private final String BOARD_SEARCH = "select * from BOARD where title like = ? order by regdate desc";
+    //private final String BOARD_SEARCH = "select * from BOARD where title like = ? order by regdate desc";
 
 
 
@@ -117,13 +117,15 @@ public class BoardDAO {
         }
     }
 
+    private final String BOARD_SEARCH = "select * from BOARD where title like ? order by regdate desc";
+
     public List<BoardVO> searchBoard(String title) {
         List<BoardVO> list = new ArrayList<>();
         try {
             con = JDBCUtill.getConnection();
             pstmt = con.prepareStatement(BOARD_SEARCH);
 
-            pstmt.setString(1, title);
+            pstmt.setString(1, "%" + title + "%");
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 BoardVO vo = new BoardVO();
