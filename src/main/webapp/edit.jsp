@@ -33,8 +33,12 @@
       <input type="text" class="form-control" id="writer" name="writer" value="<%= boardVO.getWriter() %>">
     </div>
     <div class="mb-3">
-      <label for="password" class="form-label">비밀번호</label>
-      <input type="password" class="form-control" id="password" name="password" placeholder="수정/삭제 시 비밀번호 입력">
+      <label for="category" class="form-label">카테고리</label>
+      <select class="form-select" id="category" name="category">
+        <option value="공지">공지</option>
+        <option value="자유">자유</option>
+        <option value="질문">질문</option>
+      </select>
     </div>
     <div class="mb-3">
       <label for="content" class="form-label">내용</label>

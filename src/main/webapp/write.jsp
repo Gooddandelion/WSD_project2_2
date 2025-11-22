@@ -32,9 +32,9 @@
         <div class="mb-3">
             <label for="category" class="form-label">카테고리</label>
             <select class="form-select" id="category" name="category">
-                <option value="notice">공지</option>
-                <option value="free">자유</option>
-                <option value="qna">질문</option>
+                <option value="공지">공지</option>
+                <option value="자유">자유</option>
+                <option value="질문">질문</option>
             </select>
         </div>
 
