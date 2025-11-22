@@ -25,6 +25,9 @@
             <h3><%= boardVO.getTitle() %></h3>
             <div class="text-muted small">
                 작성자: <%= boardVO.getWriter() %>
+                카테고리: <%= boardVO.getCategory()%>
+                작성일자: <%= boardVO.getRegdate()%>
+                조회수: <%= boardVO.getCnt()%>
             </div>
         </div>
         <div class="card-body">
