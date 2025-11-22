@@ -2,10 +2,13 @@
 <%@ page import="com.thc.project2_2_wsd.dao.BoardDAO" %>
 <%@ page import="com.thc.project2_2_wsd.bean.BoardVO" %>
 
+<% request.setCharacterEncoding("UTF-8"); %>
+
 <jsp:useBean id="u" class="com.thc.project2_2_wsd.bean.BoardVO"/>
+<jsp:setProperty name="u" property="*"/>
 <jsp:setProperty name="u" property="seq" param="id"/>
 
-<% request.setCharacterEncoding("UTF-8"); %>
+
 <%
     BoardDAO boardDAO = new BoardDAO();
     BoardVO boardVO = new BoardVO();
@@ -15,5 +18,5 @@
 %>
 <script>
     alert('<%=message%>');
-    location.href='view.jsp';
+    location.href='view.jsp?id=<%=u.getSeq()%>';
 </script>
