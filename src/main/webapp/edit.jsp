@@ -1,48 +1,55 @@
+<%@ page import="com.thc.project2_2_wsd.dao.BoardDAO" %>
+<%@ page import="com.thc.project2_2_wsd.bean.BoardVO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-  String id = request.getParameter("id");
 
-  String mockTitle = "수정할 제목 (ID: " + id + ")";
-  String mockWriter = "수정할 작성자";
-  String mockContent = "수정할 글 내용입니다.";
+<jsp:useBean id="u" class="com.thc.project2_2_wsd.bean.BoardVO"/>
+<jsp:setProperty name="u" property="seq" param="id"/>
+
+<%
+  BoardDAO boardDAO = new BoardDAO();
+  BoardVO boardVO = new BoardVO();
+  boardVO = boardDAO.getBoard(u.getSeq());
 %>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>글 수정</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-
+<jsp:include page="header.jsp" />
 <div class="container mt-5" style="max-width: 800px;">
-  <h2 class="text-center mb-4">글 수정 (ID: <%= id %>)</h2>
+  <h2 class="text-center mb-4">글 수정 (ID: <%= boardVO.getSeq() %>)</h2>
 
   <form action="edit_ok.jsp" method="post">
-    <input type="hidden" name="id" value="<%= id %>">
+    <input type="hidden" name="id" value="<%= boardVO.getSeq() %>">
 
     <div class="mb-3">
       <label for="title" class="form-label">제목</label>
-      <input type="text" class="form-control" id="title" name="title" value="<%= mockTitle %>">
+      <input type="text" class="form-control" id="title" name="title" value="<%= boardVO.getTitle() %>">
     </div>
     <div class="mb-3">
       <label for="writer" class="form-label">작성자</label>
-      <input type="text" class="form-control" id="writer" name="writer" value="<%= mockWriter %>">
+      <input type="text" class="form-control" id="writer" name="writer" value="<%= boardVO.getWriter() %>">
     </div>
     <div class="mb-3">
-      <label for="password" class="form-label">비밀번호</label>
-      <input type="password" class="form-control" id="password" name="password" placeholder="수정/삭제 시 비밀번호 입력">
+      <label for="category" class="form-label">카테고리</label>
+      <select class="form-select" id="category" name="category">
+        <option value="공지">공지</option>
+        <option value="자유">자유</option>
+        <option value="질문">질문</option>
+      </select>
     </div>
     <div class="mb-3">
       <label for="content" class="form-label">내용</label>
-      <textarea class="form-control" id="content" name="content" rows="10"><%= mockContent %></textarea>
+      <textarea class="form-control" id="content" name="content" rows="10"><%= boardVO.getContent() %></textarea>
     </div>
 
     <div class="d-flex justify-content-between">
-      <a href="view.jsp?id=<%= id %>" class="btn btn-secondary">취소</a>
+      <a href="view.jsp?id=<%= boardVO.getSeq() %>" class="btn btn-secondary">취소</a>
       <button type="submit" class="btn btn-primary">수정 완료</button>
     </div>
   </form>
 </div>
-
+<jsp:include page="footer.jsp" />
 </body>
 </html>

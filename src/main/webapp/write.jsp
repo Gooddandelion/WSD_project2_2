@@ -5,10 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <title>새 글 작성</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-
+<jsp:include page="header.jsp" />
 <div class="container mt-5" style="max-width: 800px;">
     <h2 class="text-center mb-4">새 글 작성</h2>
 
@@ -32,9 +31,9 @@
         <div class="mb-3">
             <label for="category" class="form-label">카테고리</label>
             <select class="form-select" id="category" name="category">
-                <option value="notice">공지</option>
-                <option value="free">자유</option>
-                <option value="qna">질문</option>
+                <option value="공지">공지</option>
+                <option value="자유">자유</option>
+                <option value="질문">질문</option>
             </select>
         </div>
 
@@ -49,6 +48,6 @@
         </div>
     </form>
 </div>
-
+<jsp:include page="footer.jsp" />
 </body>
 </html>
