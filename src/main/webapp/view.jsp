@@ -1,15 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.thc.project2_2_wsd.dao.BoardDAO" %>
-<%@ page import="com.thc.project2_2_wsd.bean.BoardVO" %>
-
-<jsp:useBean id="u" class="com.thc.project2_2_wsd.bean.BoardVO"/>
-<jsp:setProperty name="u" property="seq" param="id"/>
-
 <%
-    BoardDAO boardDAO = new BoardDAO();
-    BoardVO boardVO = new BoardVO();
-    boardVO = boardDAO.getBoard(u.getSeq());
 
+    String id = request.getParameter("id");
+
+    String mockTitle = "과제 제출합니다 (ID: " + id + ")";
+    String mockWriter = "박헌일";
+    String mockContent = "만점 부탁드려요\n\n" +
+            "글 번호 " + id + "번을 보고 계십니다.";
 %>
 <html>
 <head>
@@ -22,21 +19,21 @@
 
     <div class="card">
         <div class="card-header">
-            <h3><%= boardVO.getTitle() %></h3>
+            <h3><%= mockTitle %></h3>
             <div class="text-muted small">
-                작성자: <%= boardVO.getWriter() %>
+                작성자: <%= mockWriter %>
             </div>
         </div>
         <div class="card-body">
-            <p style="white-space: pre-wrap;"><%= boardVO.getContent() %></p>
+            <p style="white-space: pre-wrap;"><%= mockContent %></p>
         </div>
     </div>
 
     <div class="mt-4 d-flex justify-content-between">
         <a href="list.jsp" class="btn btn-secondary">목록</a>
         <div>
-            <a href="edit.jsp?id=<%= boardVO.getSeq() %>" class="btn btn-outline-primary">수정</a>
-            <a href="delete_ok.jsp?id=<%= boardVO.getSeq() %>" class="btn btn-outline-danger">삭제</a>
+            <a href="edit.jsp?id=<%= id %>" class="btn btn-outline-primary">수정</a>
+            <a href="delete_ok.jsp?id=<%= id %>" class="btn btn-outline-danger">삭제</a>
         </div>
     </div>
 </div>
