@@ -14,10 +14,9 @@
 <head>
   <meta charset="UTF-8">
   <title>글 수정</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-
+<jsp:include page="header.jsp" />
 <div class="container mt-5" style="max-width: 800px;">
   <h2 class="text-center mb-4">글 수정 (ID: <%= boardVO.getSeq() %>)</h2>
 
@@ -51,6 +50,6 @@
     </div>
   </form>
 </div>
-
+<jsp:include page="footer.jsp" />
 </body>
 </html>
