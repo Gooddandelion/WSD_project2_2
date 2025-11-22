@@ -21,6 +21,7 @@ public class BoardDAO {
     private final String BOARD_DELETE = "delete from BOARD where seq = ?";
     private final String BOARD_SELECT = "select * from BOARD where seq = ? order by regdate desc";
     private final String BOARD_UPDATE = "update BOARD set title = ?, writer = ?, category = ?, content = ? where seq = ?";
+    private final String BOARD_SEARCH = "select * from BOARD where title like = ? order by regdate desc";
 
 
 
@@ -111,6 +112,31 @@ public class BoardDAO {
             pstmt.setInt(5, vo.getSeq());
             pstmt.executeUpdate();
             return 1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<BoardVO> searchBoard(String title) {
+        List<BoardVO> list = new ArrayList<>();
+        try {
+            con = JDBCUtill.getConnection();
+            pstmt = con.prepareStatement(BOARD_SEARCH);
+
+            pstmt.setString(1, title);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                BoardVO vo = new BoardVO();
+                vo.setSeq(rs.getInt("seq"));
+                vo.setTitle(rs.getString("title"));
+                vo.setWriter(rs.getString("writer"));
+                vo.setCategory(rs.getString("category"));
+                vo.setContent(rs.getString("content"));
+                vo.setRegdate(rs.getDate("regdate"));
+                vo.setCnt(rs.getInt("cnt"));
+                list.add(vo);
+            }
+            return list;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
